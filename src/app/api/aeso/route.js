@@ -5,6 +5,7 @@ export async function GET(request) {
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
   const apiKey = process.env.API_KEY;
+  console.log(apiKey);
 
   // Validate API key
   if (!apiKey) {
