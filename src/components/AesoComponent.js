@@ -76,7 +76,7 @@ const AesoComponent = ({ data }) => {
           y: {
             title: {
               display: true,
-              text: 'Price (in CAD$)',
+              text: 'Price (in CAD$/MW)',
             },
             min: 0, // Set the minimum value of the y-axis to 0
           },
