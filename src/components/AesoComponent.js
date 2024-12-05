@@ -6,30 +6,18 @@ const AesoComponent = ({ data }) => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-    // Function to calculate 30-day rolling average
-    const calculateRollingAverage = (data, hoursPerDay = 24, days = 30) => {
-      const rollingAverages = [];
-      const totalHours = hoursPerDay * days;
-
-      for (let i = 0; i < data.length; i++) {
-        const startIdx = Math.max(0, i - totalHours + 1); // Calculate start index
-        const windowData = data.slice(startIdx, i + 1); // Get 30-day window
-        const sum = windowData.reduce((acc, item) => acc + parseFloat(item.pool_price), 0); // Sum prices
-        rollingAverages.push(sum / windowData.length); // Calculate average
-      }
-
-      return rollingAverages;
-    };
 
     // Function to format the data for Chart.js
     const processDataForChart = () => {
       // Prepare arrays for x-axis (dates) and y-axis (pool prices)
       const labels = [];
       const poolPrices = [];
+      const rollingAverages = [];
 
       data.forEach((item) => {
-        const beginDateTime = item.begin_datetime_mpt; // "2024-11-01 00:00"
-        const poolPrice = parseFloat(item.pool_price); // "29.95" as a float
+        const beginDateTime = item.begin_datetime_mpt; 
+        const poolPrice = parseFloat(item.pool_price); 
+        const rollingAvg = parseFloat(item.rolling_30day_avg);
 
         // Format the date into 'yyyy-mm-dd HE00' format
         const date = new Date(beginDateTime); // Convert string to Date object
@@ -42,13 +30,11 @@ const AesoComponent = ({ data }) => {
           parseInt(hour) + 1
         ).padStart(2, '0')}`;
 
-        // Push formatted label and pool price to the arrays
+        // Push formatted items to arrays
         labels.push(formattedLabel);
         poolPrices.push(poolPrice);
+        rollingAverages.push(rollingAvg);
       });
-
-      // Calculate rolling averages
-      const rollingAverages = calculateRollingAverage(data);
 
       // Return the chart data structure
       setChartData({
