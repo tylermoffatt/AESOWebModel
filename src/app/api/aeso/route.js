@@ -46,7 +46,7 @@ export async function GET(request) {
   }
 
   try {
-    const response = await axios.get('https://api.aeso.ca/report/v1.1/price/poolPrice', {
+    const response = await axios.get('https://apimgw.aeso.ca/public/poolprice-api/v1.1/price/poolPrice?startDate={startDate}', {
       params: { startDate, endDate },
       headers: {
         'accept': 'application/json',
