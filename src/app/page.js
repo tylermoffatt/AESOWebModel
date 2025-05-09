@@ -1,4 +1,4 @@
-"use client"; // Ensure this component is client-rendered
+//"use client"; // Ensure this component is client-rendered
 
 import React, { useState, useEffect } from 'react';
 import DateRangeForm from '@/components/DateRangeForm'; // Assuming you have this form component
