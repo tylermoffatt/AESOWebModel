@@ -4,7 +4,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const startDate = searchParams.get('startDate');
   const endDate = searchParams.get('endDate');
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.AESO_API_KEY;
   console.log(apiKey);
 
   // Validate API key
@@ -46,13 +46,14 @@ export async function GET(request) {
   }
 
   try {
-    const response = await axios.get('https://apimgw.aeso.ca/public/poolprice-api/v1.1/price/poolPrice?startDate={startDate}', {
-      params: { startDate, endDate },
+    const response = await axios.get(`https://apimgw.aeso.ca/public/poolprice-api/v1.1/price/poolPrice?startDate=${startDate}&endDate=${endDate}`, {
+      method: 'GET',
       headers: {
-        'accept': 'application/json',
-        'X-API-Key': apiKey,
+        'Cache-Control': 'no-cache',
+        'API-Key': apiKey,
       },
-    });
+    }
+  );
 
     const data = response.data?.return?.['Pool Price Report'] || [];
 

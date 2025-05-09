@@ -2,7 +2,7 @@
   "name": "aeso_rates",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.aeso.ca",
+  "proxy": "https://apimgw.aeso.ca/public/poolprice-api/v1.1",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^1.7.7",
     "chart.js": "^4.4.6",
-    "next": "15.0.3",
+    "next": "^15.3.2",
     "react": "^18.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.0.0"

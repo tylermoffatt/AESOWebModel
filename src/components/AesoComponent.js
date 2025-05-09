@@ -6,7 +6,7 @@ const AesoComponent = ({ data }) => {
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
-
+    console.log('Data received in AesoComponent;', data);
     // Function to format the data for Chart.js
     const processDataForChart = () => {
       // Prepare arrays for x-axis (dates) and y-axis (pool prices)
@@ -21,12 +21,13 @@ const AesoComponent = ({ data }) => {
 
         // Format the date into 'yyyy-mm-dd HE00' format
         const date = new Date(beginDateTime); // Convert string to Date object
-        const year = date.getFullYear();
+        const yearValue = date.getFullYear(); // Renamed 'year' to 'yearValue'
         const month = String(date.getMonth() + 1).padStart(2, '0'); // Ensure 2-digit month
         const day = String(date.getDate()).padStart(2, '0'); // Ensure 2-digit day
         const hour = String(date.getHours()).padStart(2, '0'); // Ensure 2-digit hour
 
-        const formattedLabel = `${year}-${month}-${day} HE${String(
+        // Use backticks correctly for template literals
+        const formattedLabel = `${yearValue}-${month}-${day} HE${String(
           parseInt(hour) + 1
         ).padStart(2, '0')}`;
 
@@ -63,7 +64,7 @@ const AesoComponent = ({ data }) => {
     if (data && data.length > 0) {
       processDataForChart();
     }
-  }, [data]); // Re-run this effect if `data` changes
+  }, [data]); // Re-run this effect if data changes
 
   // If chartData is still null, return a loading state
   if (!chartData) {
