@@ -1,4 +1,4 @@
-// components/DateRangeForm.js
+
 
 import React, { useState } from 'react';
 
@@ -9,7 +9,7 @@ const DateRangeForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (startDate && endDate) {
-      onSubmit(startDate, endDate); // Call the parent onSubmit function with the dates
+      onSubmit(startDate, endDate); 
     }
   };
 

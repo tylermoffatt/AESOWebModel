@@ -7,9 +7,9 @@ const AesoComponent = ({ data }) => {
 
   useEffect(() => {
     console.log('Data received in AesoComponent;', data);
-    // Function to format the data for Chart.js
+    
     const processDataForChart = () => {
-      // Prepare arrays for x-axis (dates) and y-axis (pool prices)
+      
       const labels = [];
       const poolPrices = [];
       const rollingAverages = [];
@@ -26,34 +26,34 @@ const AesoComponent = ({ data }) => {
         const day = String(date.getDate()).padStart(2, '0'); // Ensure 2-digit day
         const hour = String(date.getHours()).padStart(2, '0'); // Ensure 2-digit hour
 
-        // Use backticks correctly for template literals
+        
         const formattedLabel = `${yearValue}-${month}-${day} HE${String(
           parseInt(hour) + 1
         ).padStart(2, '0')}`;
 
-        // Push formatted items to arrays
+   
         labels.push(formattedLabel);
         poolPrices.push(poolPrice);
         rollingAverages.push(rollingAvg);
       });
 
-      // Return the chart data structure
+     
       setChartData({
         labels: labels,
         datasets: [
           {
             label: 'AESO Pool Price',
             data: poolPrices,
-            borderColor: 'rgba(75, 192, 192, 1)', // Line color
-            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Area under the line
+            borderColor: 'rgba(75, 192, 192, 1)', 
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', 
             fill: true,
             tension: 0.1,
           },
           {
             label: '30-Day Rolling Average',
             data: rollingAverages,
-            borderColor: 'rgba(70, 130, 180, 0.7)', // Line color
-            backgroundColor: 'rgba(70, 130, 180, 0.1)', // semi-transparent for hover
+            borderColor: 'rgba(70, 130, 180, 0.7)', 
+            backgroundColor: 'rgba(70, 130, 180, 0.1)', 
             fill: false,
             tension: 0.1,
           },
@@ -64,9 +64,9 @@ const AesoComponent = ({ data }) => {
     if (data && data.length > 0) {
       processDataForChart();
     }
-  }, [data]); // Re-run this effect if data changes
+  }, [data]); 
 
-  // If chartData is still null, return a loading state
+  
   if (!chartData) {
     return <div>Loading...</div>;
   }
@@ -79,7 +79,7 @@ const AesoComponent = ({ data }) => {
           responsive: true,
           scales: {
             x: {
-              type: 'category', // Treat x-axis as categorical
+              type: 'category', 
               title: {
                 display: true,
                 text: 'Date (HE)',
@@ -90,7 +90,7 @@ const AesoComponent = ({ data }) => {
                 display: true,
                 text: 'Price (in CAD$/MW)',
               },
-              min: 0, // Set the minimum value of the y-axis to 0
+              min: 0, 
             },
           },
         }}

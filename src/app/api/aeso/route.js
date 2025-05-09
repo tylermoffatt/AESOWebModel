@@ -7,7 +7,7 @@ export async function GET(request) {
   const apiKey = process.env.AESO_API_KEY;
  
 
-  // Validate API key
+  
   if (!apiKey) {
     return new Response(
       JSON.stringify({ error: 'API key is missing' }),
@@ -18,7 +18,7 @@ export async function GET(request) {
     );
   }
 
-  // Validate query parameters: Check if both startDate and endDate are present
+  
   if (!startDate || !endDate) {
     return new Response(
       JSON.stringify({ error: 'startDate and endDate query parameters are required' }),
@@ -29,7 +29,7 @@ export async function GET(request) {
     );
   }
 
-  // Optional: Validate date format (YYYY-MM-DD)
+  
   const isValidDate = (date) => {
     const regex = /^\d{4}-\d{2}-\d{2}$/; // Basic regex to check for YYYY-MM-DD format
     return regex.test(date);
